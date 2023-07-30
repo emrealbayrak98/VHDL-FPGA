@@ -4,23 +4,23 @@ use ieee.numeric_std.all;
 
 entity VGA is 
 	port(
-	   clk_50Mhz   : in std_logic;
-		reset       : in  std_logic;
-	   R           : out std_logic;
-      G           : out std_logic;
-      B           : out std_logic;
-      hsync       : out std_logic;
-		clk25Mhz    : out std_logic;
-		blank       : out std_logic:='1';
-		sync        : out std_logic:='1';
-		rr          : out std_logic_vector(6 downto 0):=(others =>'0');
-		gg          : out std_logic_vector(6 downto 0):=(others =>'0');
-		bb          : out std_logic_vector(6 downto 0):=(others =>'0');
-      vsync       : out std_logic;
-		temp        : in std_logic_vector(7 downto 0);
-		mode_temp   : in std_logic_vector(7 downto 0);
-		fan         : in std_logic_vector(7 downto 0);
-		desired     : in std_logic_vector(7 downto 0)
+	clk_50Mhz   : in std_logic;
+	reset       : in  std_logic;
+	R           : out std_logic;
+	G           : out std_logic;
+	B           : out std_logic;
+	hsync       : out std_logic;
+	clk25Mhz    : out std_logic;
+	blank       : out std_logic:='1';
+	sync        : out std_logic:='1';
+	rr          : out std_logic_vector(6 downto 0):=(others =>'0');
+	gg          : out std_logic_vector(6 downto 0):=(others =>'0');
+	bb          : out std_logic_vector(6 downto 0):=(others =>'0');
+	vsync       : out std_logic;
+	temp        : in std_logic_vector(7 downto 0);
+	mode_temp   : in std_logic_vector(7 downto 0);
+	fan         : in std_logic_vector(7 downto 0);
+	desired     : in std_logic_vector(7 downto 0)
 	
 	);
 	end entity;
@@ -66,23 +66,23 @@ architecture behavioral of VGA is
 
 component vga80x40 is
   port (
-    reset       : in  std_logic;
-    clk25MHz    : in  std_logic;
-    TEXT_A      : out std_logic_vector(11 downto 0); -- text buffer
-    TEXT_D      : in  std_logic_vector(07 downto 0);
-	 FONT_A      : out std_logic_vector(11 downto 0); -- font buffer
-	 FONT_D      : in  std_logic_vector(07 downto 0);
-	 --
-	 ocrx        : in  std_logic_vector(07 downto 0); -- OUTPUT regs
-    ocry        : in  std_logic_vector(07 downto 0);
-    octl        : in  std_logic_vector(07 downto 0);
-    --
-    R           : out std_logic;
-    G           : out std_logic;
-    B           : out std_logic;
-    hsync       : out std_logic;
-    vsync       : out std_logic
-    );   
+	reset       : in  std_logic;
+	clk25MHz    : in  std_logic;
+	TEXT_A      : out std_logic_vector(11 downto 0); -- text buffer
+	TEXT_D      : in  std_logic_vector(07 downto 0);
+	FONT_A      : out std_logic_vector(11 downto 0); -- font buffer
+	FONT_D      : in  std_logic_vector(07 downto 0);
+	--
+	ocrx        : in  std_logic_vector(07 downto 0); -- OUTPUT regs
+	ocry        : in  std_logic_vector(07 downto 0);
+	octl        : in  std_logic_vector(07 downto 0);
+	--
+	R           : out std_logic;
+	G           : out std_logic;
+	B           : out std_logic;
+	hsync       : out std_logic;
+	vsync       : out std_logic
+	);   
 end component;
     component pll is
         port (
@@ -186,23 +186,23 @@ u0 : component pll
 	  );
 
 v : vga80x40 port map (
-    reset      => '0',
-    clk25MHz   => clk_25Mhz,
-    TEXT_A     => text_address,
-    TEXT_D     => text_data,
-	 FONT_A     => font_address,
-	 FONT_D     => font_data,
-	 --
-	 ocrx       => "00000101",
-    ocry       => "00000101",
-    octl       => "10000111",
-    --
-    R          => R ,
-    G          => G,
-    B          => B,
-    hsync      => hsync,
-    vsync      => vsync
-    );   
+	reset      => '0',
+	clk25MHz   => clk_25Mhz,
+	TEXT_A     => text_address,
+	TEXT_D     => text_data,
+	FONT_A     => font_address,
+	FONT_D     => font_data,
+	--
+	ocrx       => "00000101",
+	ocry       => "00000101",
+	octl       => "10000111",
+	--
+	R          => R ,
+	G          => G,
+	B          => B,
+	hsync      => hsync,
+	vsync      => vsync
+	);   
 
 		 txt : component mem_text
         port map (
